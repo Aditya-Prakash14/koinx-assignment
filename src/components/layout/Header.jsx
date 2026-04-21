@@ -2,7 +2,7 @@ import React from "react";
 import { Icons } from "../common/Icons";
 import { useTheme } from "../../context/ThemeContext";
 
-export default function Header({ title = "Tax Loss Harvesting" }) {
+export default function Header({ title = "Tax Loss Harvesting", breadcrumb = "Tax" }) {
   const { theme, isDark, toggleTheme } = useTheme();
 
   return (
@@ -16,7 +16,7 @@ export default function Header({ title = "Tax Loss Harvesting" }) {
     }}>
       {/* Breadcrumb */}
       <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-        <span style={{ fontSize: 11, color: theme.textTertiary }}>Tax</span>
+        <span style={{ fontSize: 11, color: theme.textTertiary }}>{breadcrumb}</span>
         <svg viewBox="0 0 24 24" width={10} height={10} fill="none" stroke="currentColor" strokeWidth="2" style={{ color: theme.textQuaternary }}>
           <polyline points="9 18 15 12 9 6" />
         </svg>
@@ -31,15 +31,21 @@ export default function Header({ title = "Tax Loss Harvesting" }) {
           onClick={toggleTheme}
           title={isDark ? "Switch to light mode" : "Switch to dark mode"}
           style={{
-            background: theme.bgTertiary,
-            border: `1px solid ${theme.border}`,
-            color: theme.textSecondary,
+            background: isDark ? "rgba(255,255,255,0.05)" : theme.bgTertiary,
+            border: `1px solid ${isDark ? "rgba(255,255,255,0.1)" : theme.border}`,
+            color: isDark ? "#ffffff" : theme.textSecondary,
             width: 32, height: 32, borderRadius: 8,
             display: "flex", alignItems: "center", justifyContent: "center",
             cursor: "pointer", transition: "all 0.2s",
           }}
-          onMouseEnter={e => { e.currentTarget.style.borderColor = theme.accentColor; e.currentTarget.style.color = theme.accentColor; }}
-          onMouseLeave={e => { e.currentTarget.style.borderColor = theme.border; e.currentTarget.style.color = theme.textSecondary; }}
+          onMouseEnter={e => { 
+            e.currentTarget.style.borderColor = isDark ? "rgba(255,255,255,0.3)" : theme.accentColor; 
+            e.currentTarget.style.background = isDark ? "rgba(255,255,255,0.1)" : theme.bgTertiary;
+          }}
+          onMouseLeave={e => { 
+            e.currentTarget.style.borderColor = isDark ? "rgba(255,255,255,0.1)" : theme.border; 
+            e.currentTarget.style.background = isDark ? "rgba(255,255,255,0.05)" : theme.bgTertiary;
+          }}
         >
           {isDark ? <Icons.Sun /> : <Icons.Moon />}
         </button>

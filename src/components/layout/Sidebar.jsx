@@ -10,9 +10,8 @@ const NAV_ITEMS = [
   { id: "reports", label: "Reports", Icon: Icons.Reports },
 ];
 
-export default function Sidebar() {
+export default function Sidebar({ activeNav, setActiveNav }) {
   const { theme, isDark } = useTheme();
-  const [activeNav, setActiveNav] = useState("tax");
 
   return (
     <aside className="sidebar" style={{
@@ -27,17 +26,15 @@ export default function Sidebar() {
       <div
         title="KoinX"
         style={{
-          width: 38, height: 38, borderRadius: 10,
-          background: `linear-gradient(135deg, ${theme.accentGradStart} 0%, ${theme.accentGradEnd} 100%)`,
+          width: 48,
           display: "flex", alignItems: "center", justifyContent: "center",
           marginBottom: 18, cursor: "pointer",
-          boxShadow: `0 6px 20px ${theme.accentGradStart}40`,
           transition: "all 0.3s ease",
         }}
-        onMouseEnter={e => { e.currentTarget.style.transform = "scale(1.08) rotate(-5deg)"; }}
-        onMouseLeave={e => { e.currentTarget.style.transform = "scale(1) rotate(0deg)"; }}
+        onMouseEnter={e => { e.currentTarget.style.opacity = 0.8; }}
+        onMouseLeave={e => { e.currentTarget.style.opacity = 1; }}
       >
-        <Icons.Lightning />
+        <img src="/dark (1).svg" alt="KoinX" style={{ width: "100%", height: "auto" }} />
       </div>
 
       {/* Nav Items */}
@@ -54,14 +51,26 @@ export default function Sidebar() {
                 display: "flex", alignItems: "center", justifyContent: "center",
                 cursor: "pointer", border: "none", outline: "none",
                 background: isActive
-                  ? (isDark ? "rgba(91,141,238,0.16)" : "rgba(79,70,229,0.1)")
+                  ? (isDark ? "rgba(255,255,255,0.1)" : "rgba(79,70,229,0.1)")
                   : "transparent",
-                color: isActive ? theme.accentColor : theme.textQuaternary,
+                color: isActive 
+                  ? (isDark ? "#ffffff" : theme.accentColor) 
+                  : (isDark ? "rgba(255,255,255,0.6)" : theme.textQuaternary),
                 transition: "all 0.15s",
                 position: "relative",
               }}
-              onMouseEnter={e => { if (!isActive) { e.currentTarget.style.background = theme.bgHover; e.currentTarget.style.color = theme.textSecondary; } }}
-              onMouseLeave={e => { if (!isActive) { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = theme.textQuaternary; } }}
+              onMouseEnter={e => { 
+                if (!isActive) { 
+                  e.currentTarget.style.background = isDark ? "rgba(255,255,255,0.05)" : theme.bgHover; 
+                  e.currentTarget.style.color = isDark ? "#ffffff" : theme.textSecondary; 
+                } 
+              }}
+              onMouseLeave={e => { 
+                if (!isActive) { 
+                  e.currentTarget.style.background = "transparent"; 
+                  e.currentTarget.style.color = isDark ? "rgba(255,255,255,0.6)" : theme.textQuaternary; 
+                } 
+              }}
             >
               {isActive && (
                 <span className="active-indicator" style={{
