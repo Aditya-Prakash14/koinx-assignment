@@ -1,22 +1,104 @@
-*, *::before, *::after {
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap');
+
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-html, body, #root {
-  width: 100%;
+body, html {
   height: 100%;
+  width: 100%;
   overflow: hidden;
 }
 
-body {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
+button {
+  font-family: inherit;
 }
 
-#root {
-  display: flex;
-  flex-direction: column;
+@keyframes shimmer {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 0.9; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+/* Base scrollbar styling (will be overridden by inline styles but good as fallback) */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(150, 150, 150, 0.3);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(150, 150, 150, 0.5);
+}
+
+/* ─── Responsive Styles ─── */
+
+/* Tablet & Mobile navigation adjustments */
+@media (max-width: 768px) {
+  .app-container {
+    flex-direction: column !important;
+  }
+  
+  .sidebar {
+    width: 100% !important;
+    height: 60px !important;
+    flex-direction: row !important;
+    padding: 0 20px !important;
+    border-right: none !important;
+    border-bottom: 1px solid var(--border-color, rgba(0,0,0,0.1));
+    justify-content: space-between;
+    order: 2; /* Move it to bottom */
+  }
+
+  /* Make nav container horizontal */
+  .sidebar .nav-items-container {
+    flex-direction: row !important;
+    justify-content: center;
+    gap: 16px !important;
+    width: auto !important;
+  }
+
+  .sidebar > div[title="KoinX"] {
+    margin-bottom: 0 !important;
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  .sidebar .user-avatar-container {
+    margin-top: 0 !important;
+  }
+
+  /* Hide active indicator line on mobile since buttons are horizontal now */
+  .sidebar .active-indicator {
+    display: none !important;
+  }
+  
+  /* Add bottom active line */
+  .sidebar .nav-button {
+    position: relative;
+  }
+  
+  /* Update summary cards */
+  .summary-cards {
+    flex-direction: column !important;
+  }
+  .summary-card {
+    min-width: 100% !important;
+  }
+}
+
+/* Smaller mobile */
+@media (max-width: 480px) {
+  .summary-cards { gap: 10px !important; }
 }
