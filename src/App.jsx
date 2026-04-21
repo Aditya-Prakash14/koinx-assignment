@@ -16,7 +16,7 @@ function AppLayout() {
       transition: "background 0.3s, color 0.3s",
     }}>
       <Sidebar />
-      <div className="main-container" style={{ flex: 1, display: "flex", flexDirection: "column", overflow: "hidden", minWidth: 0 }}>
+      <div className="main-container" style={{ flex: 1, display: "flex", flexDirection: "column", overflow: "hidden", minWidth: 0, minHeight: 0 }}>
         <Header />
         <TaxLossHarvestingPage />
       </div>

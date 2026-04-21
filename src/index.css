@@ -42,11 +42,15 @@ button {
   background: rgba(150, 150, 150, 0.5);
 }
 
-/* ─── Responsive Styles ─── */
-
 /* Tablet & Mobile navigation adjustments */
 @media (max-width: 768px) {
+  body, html {
+    overflow: auto;
+  }
   .app-container {
+    height: auto !important;
+    min-height: 100vh;
+    overflow: visible !important;
     flex-direction: column !important;
   }
   
@@ -56,37 +60,47 @@ button {
     flex-direction: row !important;
     padding: 0 20px !important;
     border-right: none !important;
-    border-bottom: 1px solid var(--border-color, rgba(0,0,0,0.1));
+    border-top: 1px solid rgba(0,0,0,0.1);
     justify-content: space-between;
-    order: 2; /* Move it to bottom */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 50;
+  }
+
+  .main-container {
+    overflow: visible !important;
+    padding-bottom: 70px; /* space for fixed sidebar */
+  }
+
+  .tax-page {
+    overflow: visible !important;
   }
 
   /* Make nav container horizontal */
   .sidebar .nav-items-container {
     flex-direction: row !important;
-    justify-content: center;
-    gap: 16px !important;
-    width: auto !important;
+    justify-content: space-around;
+    gap: 8px !important;
+    width: 100% !important;
   }
 
   .sidebar > div[title="KoinX"] {
-    margin-bottom: 0 !important;
-    width: 32px !important;
-    height: 32px !important;
+    display: none !important;
   }
 
   .sidebar .user-avatar-container {
-    margin-top: 0 !important;
+    display: none !important;
   }
 
-  /* Hide active indicator line on mobile since buttons are horizontal now */
+  /* Hide active indicator line on mobile */
   .sidebar .active-indicator {
     display: none !important;
   }
   
-  /* Add bottom active line */
   .sidebar .nav-button {
     position: relative;
+    flex: 1;
   }
   
   /* Update summary cards */

@@ -10,7 +10,7 @@ export default function TaxLossHarvestingPage() {
   const { taxSummary, postHarvestingSummary, loading, error, savings, selected } = useTax();
 
   return (
-    <div style={{
+    <div className="tax-page" style={{
       flex: 1, overflow: "auto",
       padding: "20px", display: "flex", flexDirection: "column", gap: 16,
       background: theme.bg, transition: "background 0.3s",
